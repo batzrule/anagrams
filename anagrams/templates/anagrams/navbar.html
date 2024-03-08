@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <nav class="navbar" role="navigation" >
+        <div class="navbar-brand">
+
+          <a class="navbar-item">
+            {% load static %}
+
+            <img src="{% static 'anagrams/anagram-logo.png' %}" width="140" height="28" alt="logo">
+
+            </a>
+      
+          <a role="button" class="navbar-burger" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'anagrams:home' %}">
+                Daily anagram
+                </a>
+        
+                <a class="navbar-item" href="{% url 'anagrams:past anagrams' %}">
+                Past anagrams
+                </a>
+        
+            
+                
+
+
+                <a class="navbar-item" href="{% url 'anagrams:about page' %}">
+                    How to play
+                </a>
+                <a class="navbar-item" href="{% url 'anagrams:monthly leaderboard' %}">
+                    Monthly Leaderboard
+                </a>
+      
+
+                
+              
+            </div>
+        </div>
+      
+          <div class="navbar-end">
+            {% if request.user.is_superuser %}
+                <a class="navbar-item" href="{% url 'anagrams:create anagram page' %}">
+                    Create anagram
+                </a>
+            {% endif %}
+            <div class="navbar-item">
+                
+                {% if not request.user.username %}
+                    <div class="buttons">
+                        <a class="button is-link" href="{% url 'anagrams:signup page' %}">
+                        <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-link is-light" href="{% url 'anagrams:login page' %}">
+                        Log in
+                        </a>
+                    </div>
+                {% else %}
+                <a class="button is-link" href="{% url 'anagrams:logout' %}">
+                    <strong>Log out
+                    </strong>
+                  </a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+</body>

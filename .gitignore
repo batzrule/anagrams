@@ -1,0 +1,5 @@
+twitter/
+polls/
+db.sqlite3
+anagrams/migrations/
+*.pyc

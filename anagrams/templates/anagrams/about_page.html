@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to play</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+</head>
+<body>
+
+    <section class="hero is-link">
+        <div class="hero is-head">
+            {% include 'anagrams/navbar.html' %} 
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h4 class="title is-1">How to play</h4>
+                
+                
+                    
+            </div>
+        </div>
+    </section>
+
+    <div class="columns">
+        <div class="column is-one-fifth"></div>
+        <div class="column is-three-fifths">
+            <section class="section is-centered">
+  
+                    <div class="card mb-5">
+                        <div class="card-content">
+                            <h2 class="title is-3">What are anagrams?</h2>
+
+                                <p>An anagram is the rearrangement of letters in a word. For example, 'cat' would be an anagram of 'act', because rearranging the letters of one gives you the other.</p>
+                            </div>
+                    </div>
+
+   
+                    <div class="card mb-5">
+                        <div class="card-content">
+                            <h2 class="title is-3">How to play</h2>
+
+                    
+   
+                            <p>On this website, you will find a new anagram puzzle to solve every day. All you have to do to solve them is rearrange the mixed up words to make a real word. Once you have found the word, you can submit it to check if it's correct.</p>
+                        </div>
+                    </div>
+
+                    {% comment %}
+                    <div class="card mb-5">
+                        <div class="card-content">
+                            <h2 class="title is-3">Take on the challenge</h2>
+
+                            <p>Despite its simplicity, is a fun puzzle - as of today this website has {{Anagram.objects.count}} anagrams</p>
+                        </div>
+                    </div>
+                    {% endcomment %}
+
+                <a class="button is-link is-medium is-centered" href="{% url 'anagrams:home' %}"><strong>Give it a go!</strong></a>
+            </section>
+        </div>
+        <div class="column is one-fifth"></div>
+    </div>
+
+    {% comment %}
+    <div class="container">
+        {% include 'anagrams/choose_anagram.html' %}
+        {% include 'anagrams/index.html' %}
+    </div>
+    {% endcomment %}
+
+</body>
+                    

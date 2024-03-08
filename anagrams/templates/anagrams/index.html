@@ -1,0 +1,51 @@
+     
+        
+        {% if fil_dif %}
+        <div class="columns">
+
+            {% for list in recent_anagrams %}
+            
+                <div class="column is-one-quarter">
+                        
+                    {% for anagram in list %}
+                        {% if anagram.difficulty == fil_dif %}
+
+                            <div class="notification is-link is-light">
+                                <a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5">Anagram {{ anagram.id }}</a>
+                                <p> {{ anagram.date_posted }}</p>
+                            </div>
+
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+
+        {% else %}
+            <div class="columns">
+
+                {% for list in recent_anagrams %}
+                
+                    <div class="column is-one-quarter">
+                            
+                        {% for anagram in list %}
+
+                                <div class="notification is-link is-light">
+                                    <a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5">Anagram {{ anagram.id }}</a>
+                                    <p> {{ anagram.date_posted }}</p>
+                                </div>
+    
+                
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        
+            
+            
+
+            
+        {% endif %}
+

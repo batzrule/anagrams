@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create anagram</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+    <section class="hero is-link">
+        <div class="hero is-head">
+            {% include 'anagrams/navbar.html' %} 
+        </div>
+        
+                               
+
+    </section>
+
+    <section class="section is-centered">
+        <div class="columns">
+            <div class="column is-one-fifth"></div>
+            <div class="column is-three-fifths">
+                <h4 class="title 4">Set an anagram</h4>
+                
+                <form action="{% url 'anagrams:create anagram' %}" method="post" class="box">
+                    {% csrf_token %}
+                
+                
+                    <div class="field">
+                        <label for="anagram text">Enter your anagram</label>
+                        <div class="control">
+                            <input class="input" name="anagram text", id="anagram text", minlength="3" ></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for=" solution text">Enter the solution</label>
+                        <div class="control">
+                            <input class="input" name="solution text", id="solution text", minlength="3" ></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="button is-link" type="submit" value="post">
+                        </div>
+                    </div>
+                
+                </form>
+                <div class="notification is-link is-light ">
+                    {% if fail %}
+                        <h4 class="title is-5">Unsuccessful, please try again. {{anagrams.0.author}}</h4>
+                        
+                    {% else %}
+                        <h4 class="title is-5">You added anagram {{anagrams.0.id}}: {{anagrams.0.text}}</h4>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="column is-one-fifth"></div>
+        </div>
+    </section>
+</body>

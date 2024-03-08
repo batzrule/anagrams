@@ -1,0 +1,35 @@
+{% if solutions %}
+            <h3 class="title is-4">Leaderboard</h3>
+            <div class="box">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in solutions %}
+                            {% if object.user == request.user %}
+                                <tr class="is-selected">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ object.user }}</td>
+                                    <td>{{ object.time_length }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ object.user }}</td>
+                                    <td>{{ object.time_length }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+{% else %}
+    <p>wait for others to solve before you can see a leaderboard</p>
+{% endif %}
+

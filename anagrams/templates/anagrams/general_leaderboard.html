@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Monthly Stats</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+</head>
+<body>
+
+    <section class="hero is-link">
+        <div class="hero is-head">
+            {% include 'anagrams/navbar.html' %} 
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-1">Your Monthly Stats</h1>
+                
+                    
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+            
+        <div class="columns">
+            <div class="column is-one-quarter">
+
+                {% if user_solves %}
+                    {% for key, value in user_list.items %}
+                        {% if value.0 == request.user %}
+                    
+                            <div class="block">
+                                <p> Hey {{request.user.username}}, this month you've solved <strong>{{value.1}}</strong> anagrams out of 30.</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                        {% for solve in solutions %}
+                                {% if solve.user == request.user %}
+                                    <div class="box">
+                                        <h4 class="title is-4">{{solve.anagram.text}}</h4>
+                                    </div>
+                                {% endif %}
+                        {% endfor %}
+                {% endif %}
+            </div>
+
+
+            <div class="column is-half">
+
+                    
+                    <h2 class="title is-2">Monthly Leaderboard</h2>
+                    {% if user_solves %}
+                        {% for key, value in user_list.items %}
+                            {% if value.0 == request.user %}
+                                {% if key == 10 or key == 9 or key == 8 or key == 7 or key == 6 or key == 5 or key == 4 or key == 3 or key == 2 or key == 1 %}
+                                <div class="block">
+                                    <p> Congratulations, you are in place <strong>{{key}}</strong> in the leaderboard with an average time of <strong>{{value.2}}</strong> accross <strong>{{value.1}}</strong> anagrams!</p>
+                                </div>
+                                {% else %}
+                                <div class="block">
+                                    <p> You are in place <strong>{{key}}</strong> in the leaderboard with an average time of <strong>{{value.2}}</strong> accross <strong>{{value.1}}</strong> anagrams</p>
+                                </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="block">
+                            <a href="{% url 'anagrams:past anagrams' %}" class="button is-link is-centered">Go solve!</a>
+                        </div>
+                    {% endif %}
+                        <div class="block">
+                            <p>The monthly leaderboard ranks solvers according to their average time taken to solve anagrams over the last 30 days. You will only be ranked if you have completed <strong>1 or more</strong>  puzzle during this time.</p>
+                        </div>
+                        
+                    
+
+            <div class="box">
+                <div class="table-container">
+                    <table class="table is-bordered">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Username</th>
+                                <th>Solves</th>
+                                <th>Average Time</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in user_list.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value.0 }}</td>
+                                    <td>{{ value.1 }}</td>
+                                    <td>{{ value.2 }}</td>
+                                    <td>{{ value.3 }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            </div>
+            <div class="column is-one-quarter">
+                {% if user_solves %}
+
+                    <div class="block">
+                        <p>Your quickest solve this month was {{user_solves.0.time_length}} for <strong>{{user_solves.0.anagram.text}}</strong></p>
+                    </div>
+
+                    {% for key, value in user_list.items %}
+                        {% if value.0 == request.user %}
+                    
+                            <div class="block">
+                                <p> you solved <strong>{{value.4.0}}</strong> easy anagrams, <strong>{{value.4.1}}</strong> medium anagrams and <strong>{{value.4.2}}</strong> hard anagrams.</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+    </section>
+
+
+
+</body>

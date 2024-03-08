@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<head>
+    <title>login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <section class="hero is-link">
+        <div class="hero is-head">
+            {% include 'anagrams/navbar.html' %} 
+        </div>
+        
+    </section>
+    <section class="section">
+
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <h1 class="title">Login here</h1>
+                <div class="box">
+                    <form action="{% url 'anagrams:login' %}" method="post">
+                        {% csrf_token %}
+                        {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+
+                        <div class="field">
+                            <label class="label" for="username">username</label>
+                            <div class="control">
+                                <input class="input" type="text" , name="username" , id="username" ,
+                                    placeholder="username">
+                            </div>
+                        </div>
+                        <div class="field">
+
+                            <label class="label" for="password">password</label>
+                            <div class="control">
+                                <input class="input" type="password" , name="password" , id="password" ,
+                                    placeholder="password">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input class="button is-link is-light" type="submit" value="Login">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="mt-3">
+                        <a href="{% url 'anagrams:signup page' %}">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

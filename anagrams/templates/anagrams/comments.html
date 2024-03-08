@@ -1,0 +1,74 @@
+
+
+        <h4 class="title is-4">Comments</h4>
+        
+        <div class="section">
+        
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                            <strong>Post a comment</strong>
+                            <br>
+                            <form action="{% url 'anagrams:post comment' anagram.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="field">
+        
+                                    <div class="control">
+                                        <textarea class="input" name="comment text", id="comment text"rows="5" cols="30"></textarea>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <input class="button" type="submit" value="post">
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+        
+                        </div>
+                    </nav>
+                </article>
+        
+        
+            </form>
+            {% if comment_list %}
+                {% for comment in comment_list %}
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                <strong>{{comment.author}}</strong> <small>{{comment.time_ago}}</small>
+                                <br>
+                                {{ comment.text }}
+                                </p>
+                            </div>
+                            <nav class="level is-mobile">
+                                <div class="level">
+                                    <a class="level-item" href="{% url 'anagrams:like comment' comment.id %}">
+                                        <span class="icon is-medium">
+                                            {% if user in comment.likers.all %}
+                                                <ion-icon name="heart"></ion-icon>
+                                            {% else %}
+                                                <ion-icon name="heart-outline"></ion-icon>
+                                            {% endif %}
+                                        </span>
+                                        <span>{{comment.likes}} Likes</span>
+                                    </a>
+                                {% if comment.author == user %}
+                                    <a class="level-item" href="{% url 'anagrams:delete comment' comment.id %}">
+                                        Delete
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </nav>
+                    </article>
+        
+            {% endfor %}
+        </div>
+
+    
+    {% else %}
+        no comments yet
+    {% endif %}
+

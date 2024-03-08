@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>daily anagram</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+
+
+</head>
+<body>
+    
+    
+            
+            {% if anagram %}
+                {% if user_solution %}
+                <section class="hero is-link">
+                    <div class="hero is-head">
+                        {% include 'anagrams/navbar.html' %} 
+                    </div>
+                    <div class="hero-body">
+                        <div class="container has-text-centered">
+                            
+                                <h1 class="title is-2">{{ anagram.solution_text }}</h1>
+                                <h4 class="title is-4"> difficulty: {{anagram.difficulty}}</h4>
+                                        {% if user_solution.revealed %}
+                                            <p>you revealed this answer</p>
+                                        {% else %}
+                                            <p>you solved this anagram in {{ user_solution.time_taken }} seconds</p>
+                                        {% endif %}
+                        </div>
+                    </div>
+                </section>
+                        
+
+                <section class="section">
+                    <div class="columns">
+                        <div class="column is-one-quarter">
+                    
+                                {% include 'anagrams/leaderboard.html' %}
+                        </div>
+                        <div class="column is-half">
+                            <h2 class="title is-3">Past Puzzles</h2>
+                            {% include 'anagrams/choose_anagram.html' %}
+                            {% include 'anagrams/index.html' %}
+                    
+                        </div>
+                        <div class="column is-one-quarter">
+                            {% include 'anagrams/comments.html' %}
+                        </div>
+                    </div>
+                </section>
+
+                {% else %}
+                <section class="hero is-link">
+                    <div class="hero-head">
+                        {% include 'anagrams/navbar.html' %} 
+                    </div>
+                    <div class="hero-body">
+                        <div class="columns is-centered">
+                            <div class="column is-half">
+                                
+                                    <div class="notification is-half is-link is-light">
+                                        <h1 class="title is-2 has-text-link" >{{ anagram.text }}</h1>
+                                    </div>
+                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                    
+                                        <article class="media">
+                                            <div class="media-content">
+                                                
+                                                    <p>
+                                                        <h4 class="title is-4">Enter your solution:</h4>
+            
+                                                    <form action="{% url 'anagrams:check solution' anagram.id %}" id="solveForm" method="post">
+                                                        {% csrf_token %}
+                                                        <input type="text" name="time" id="timetaken" hidden>
+                                                        <div class="field">
+                                                            <div class="control">
+                                                                <input class="input" name="solution"></input>
+                                                            </div>
+                                                        </div>
+                                                        {% if request.user.is_authenticated %}
+                                                        <div class="field">
+                                                            <div class="control">
+                                                                <input class="button" id='btnSolve' onclick="submitSolution()" type="submit" value="Check">
+                                                            </div>
+                                                        </div>
+                                                        {% else %}
+                                                            <h4 class="title is-4">Login or sign up to submit a solution!</h4>
+                                                        {% endif %}
+                                                    </form>
+                                                    </p>
+
+                                            </div>
+                                        </article>
+                                {% if request.user.is_authenticated %}
+                                <div class="container"><a href="{% url 'anagrams:reveal solution' anagram.id %}">reveal solution</a></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                
+
+                    <section class="section is-centered">
+                        <h2 class="title is-2">Past Puzzles</h2>
+                        {% include 'anagrams/choose_anagram.html' %}
+                    
+                    
+                        {% include 'anagrams/index.html' %}
+              
+                    
+                    </section>
+
+                {% endif %}
+                
+            
+            {% endif %}
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
+                
+            
+        
+  
+
+
+    
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', ready);
+    let timeEl = document.getElementById('timetaken');
+    let solveForm = document.getElementById('solveForm');
+
+    let start = 0;
+    function submitSolution(){
+        let totalTime =  Date.now() - start;
+        timeEl.value = totalTime;
+        solveForm.submit();
+    }
+
+
+    function ready() {
+        start = Date.now();
+    }
+        
+</script>
