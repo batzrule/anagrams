@@ -25,14 +25,14 @@ SECRET_KEY = 'django-insecure-dgp57kx%oh$tik=d2!38j=%66&#zhfo*tjo-4_6ef!xbt9d11w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'anagrams.eu.pythonanywhere.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'twitter.apps.TwitterConfig',
-    'polls.apps.PollsConfig',
+    # 'twitter.apps.TwitterConfig',
+    # 'polls.apps.PollsConfig',
     'anagrams.apps.AnagramsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
