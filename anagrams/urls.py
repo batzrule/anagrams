@@ -20,7 +20,7 @@ urlpatterns= [
     path ('delete_comment/<int:comment_id>/', views.delete_comment, name='delete comment'),
     path ('create_anagram/', views.create_anagram, name='create anagram'),
     path ('create_anagram_page/', views.create_anagram_page, name='create anagram page'),
-    path ('profile/<int:user_id/', views.profile_page, name='profile page'),
+    path ('profile/<int:user_id>/', views.profile_page, name='profile page'),
     path ('about_page/', views.about_page, name='about page'),
     path ('monthly_leaderboard/', views.leaderboard, name='monthly leaderboard')
 
