@@ -128,9 +128,9 @@ def leaderboard (request):
             d[user] = list
             current_user_result = d[request.user]
             '''
-        difficulties = [easy, medium, hard]
-        list = [user, num_sol, mean, points, difficulties]
-        biglist.append(list)
+            difficulties = [easy, medium, hard]
+            list = [user, num_sol, mean, points, difficulties]
+            biglist.append(list)
 
      
     for n in range(0,len(biglist)):
@@ -332,9 +332,9 @@ def create_anagram (request):
     if len(text) < 3 or len(solution_text) < 3 :
         fail = True
     if fail == False:
-        if len(text) < 6 :
+        if len(text) <= 7 :
             difficulty = 'easy'
-        elif len(text) > 7 :
+        elif len(text) >= 10 :
             difficulty = 'hard'
         else:
             difficulty = 'medium'
