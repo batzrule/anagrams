@@ -19,18 +19,18 @@
                     
                         <h1 class="title is-2">{{ anagram.solution_text }}</h1>
                         {% if anagram.difficulty == 'hard' %}
-                                    <div class="notification is-danger">
-                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                    </div>
-                                    {% elif anagram.difficulty == 'medium' %}
-                                    <div class="notification is-warning">
-                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                    </div>
-                                    {% else %}
-                                    <div class="notification is-primary">
-                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                    </div>
-                                    {% endif %}
+                            <span class="tag is-danger">
+                                <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                            </span>
+                        {% elif anagram.difficulty == 'medium' %}
+                            <span class="tag is-warning">
+                                <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                            </span>
+                        {% else %}
+                            <span class="tag is-primary">
+                                <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                            </span>
+                        {% endif %}
                                 {% if user_solution.revealed %}
                                     <p>You revealed this answer</p>
                                 {% else %}
@@ -72,18 +72,18 @@
                                 <h1 class="title is-2 has-text-link" >{{ anagram.text }}</h1>
                             </div>
                             {% if anagram.difficulty == 'hard' %}
-                                    <div class="notification is-danger">
-                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                    </div>
-                                    {% elif anagram.difficulty == 'medium' %}
-                                    <div class="notification is-warning">
-                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                    </div>
-                                    {% else %}
-                                    <div class="notification is-primary">
-                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                    </div>
-                                    {% endif %}
+                                <span class="tag is-danger">
+                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                </span>
+                            {% elif anagram.difficulty == 'medium' %}
+                                <span class="tag is-warning">
+                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                </span>
+                            {% else %}
+                                <span class="tag is-primary">
+                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                </span>
+                            {% endif %}
                             
                             <article class="media">
                                 <div class="media-content">

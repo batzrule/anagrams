@@ -34,6 +34,19 @@
                                 <div class="notification is-link is-light">
                                     <a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5">Anagram {{ anagram.id }}</a>
                                     <p> {{ anagram.date_posted }}</p>
+                                    {% if difficulty == 'hard' %}
+                                    <span class="tag is-danger">
+                                        <h4 class="title is-6">{{anagram.difficulty}}</h4>
+                                    </span>
+                                    {% elif difficulty == 'medium'%}
+                                    <span class="tag is-warning">
+                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                    </span>
+                                    {% else %}
+                                    <span class="tag is-primary">
+                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                    </span>
+                                    {% endif %}
                                 </div>
     
                 
