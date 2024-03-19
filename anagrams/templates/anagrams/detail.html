@@ -18,19 +18,21 @@
                 <div class="container has-text-centered">
                     
                         <h1 class="title is-2">{{ anagram.solution_text }}</h1>
-                        {% if anagram.difficulty == 'hard' %}
-                            <span class="tag is-danger">
-                                <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                            </span>
-                        {% elif anagram.difficulty == 'medium' %}
-                            <span class="tag is-warning">
-                                <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                            </span>
-                        {% else %}
-                            <span class="tag is-primary">
-                                <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                            </span>
-                        {% endif %}
+                        <div class="block">
+                            {% if anagram.difficulty == 'hard' %}
+                                <span class="tag is-medium is-danger">
+                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                </span>
+                            {% elif anagram.difficulty == 'medium' %}
+                                <span class="tag is-medium is-warning">
+                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                </span>
+                            {% else %}
+                                <span class="tag is-medium is-primary">
+                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                </span>
+                            {% endif %}
+                        </div>
                                 {% if user_solution.revealed %}
                                     <p>You revealed this answer</p>
                                 {% else %}
@@ -71,19 +73,21 @@
                             <div class="notification is-half is-link is-light">
                                 <h1 class="title is-2 has-text-link" >{{ anagram.text }}</h1>
                             </div>
-                            {% if anagram.difficulty == 'hard' %}
-                                <span class="tag is-danger">
-                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                </span>
-                            {% elif anagram.difficulty == 'medium' %}
-                                <span class="tag is-warning">
-                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                </span>
-                            {% else %}
-                                <span class="tag is-primary">
-                                    <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
-                                </span>
-                            {% endif %}
+                            <div class="block">
+                                {% if anagram.difficulty == 'hard' %}
+                                    <span class="tag is-medium is-danger">
+                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                    </span>
+                                {% elif anagram.difficulty == 'medium' %}
+                                    <span class="tag is-medium is-warning">
+                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                    </span>
+                                {% else %}
+                                    <span class="tag is-medium is-primary">
+                                        <h4 class="title is-6">Difficulty: {{anagram.difficulty}}</h4>
+                                    </span>
+                                {% endif %}
+                            </div>
                             
                             <article class="media">
                                 <div class="media-content">

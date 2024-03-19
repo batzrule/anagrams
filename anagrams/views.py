@@ -121,7 +121,8 @@ def leaderboard (request):
 
         if num_sol >= 1:
             mean = total/num_sol
-            points = calculate_points(mean)
+            #points = calculate_points(mean)
+            points = calculate_points_weighted(solutions)
             '''
             list = [num_sol, mean, points]
             d[user] = mean
@@ -131,6 +132,7 @@ def leaderboard (request):
             difficulties = [easy, medium, hard]
             list = [user, num_sol, mean, points, difficulties]
             biglist.append(list)
+
 
      
     for n in range(0,len(biglist)):
@@ -434,6 +436,19 @@ def time_length(seconds):
 def calculate_points (time):
     points = int(800//time) + 200
     return points
+
+def calculate_points_weighted (solutions):
+    totalpoints = 0
+    for item in solutions:
+        if item.anagram.difficulty == 'easy':
+            n = 800
+        elif item.anagram.difficulty == 'hard':
+            n = 1000
+        else:
+            n = 1200
+        points = int(n//item.time_taken) + 200
+        totalpoints += points    
+    return totalpoints
 
 def make_columns (posted_data):
     list1 = []
