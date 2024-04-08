@@ -334,9 +334,9 @@ def create_anagram (request):
     if len(text) < 3 or len(solution_text) < 3 :
         fail = True
     if fail == False:
-        if len(text) <= 7 :
+        if len(text) < 8 :
             difficulty = 'easy'
-        elif len(text) >= 10 :
+        elif len(text) > 10 :
             difficulty = 'hard'
         else:
             difficulty = 'medium'
