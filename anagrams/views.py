@@ -394,12 +394,19 @@ def login_view (request):
     password = request.POST ['password']
     username = request.POST ['username']
     user = authenticate (request, username=username, password=password)
+    context = {}
     if user is not None:
         login(request, user)
         print ('logged in')
+        context['error_message'] = None
         return redirect('anagrams:home')
     else:
-        return redirect(request.META['HTTP_REFERER'])
+        same_username = User.objects.filter(username=username)
+        if same_username == None:
+            context['error_message'] = 'No user with this username'
+        else:
+            context['error_message'] = 'Incorrect password'
+        return render(request, 'anagrams/login.html', context)
 
 
 def logout_view(request):

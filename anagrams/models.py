@@ -20,7 +20,7 @@ def MinLengthValidator(value):
 class Anagram (models.Model):
     text = models.CharField(max_length=15, default='text', null=False, validators=[MinLengthValidator]) #difficulty based on length
     solution_text = models.CharField(max_length=15, default='solution', null=False, validators=[MinLengthValidator]) #difficulty based on length
-    date_posted = models.DateField(auto_now_add=True, null=True)
+    date_posted = models.DateTimeField(null=True)
     solvers = models.ManyToManyField (User, through='Solve')
     #author = models.ManyToManyField(User, null=True)
     difficulty = models.CharField (max_length=20, default="medium")
@@ -79,18 +79,20 @@ class Comment (models.Model):
 
     text = models.CharField(max_length=60, null=True)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
-    date_posted = models.DateTimeField(auto_now_add=True, null=True)
+    date_posted = models.DateTimeField( null=True)
     likers = models.ManyToManyField(User, related_name='yes')
 
     def time_ago(self):
         if timezone.now()-self.date_posted > datetime.timedelta(days=2):
             number = (str(self.date_posted.day) + '/' + str(self.date_posted.month) + '/' + str(self.date_posted.year))
+        '''
         elif timezone.now()-self.date_posted < datetime.timedelta(hours=1):
             number = (str((self.date_posted.second)//60)+ ' minutes ago')
         elif timezone.now()-self.date_posted < datetime.timedelta(days=1):
             number = (str((self.date_posted.second)//3600)+ ' hours ago')
         else:
             number = (str(self.date_posted.day)+ ' days ago')
+            '''
         return number
 
     def __str__(self):
