@@ -20,7 +20,7 @@ def MinLengthValidator(value):
 class Anagram (models.Model):
     text = models.CharField(max_length=15, default='text', null=False, validators=[MinLengthValidator]) #difficulty based on length
     solution_text = models.CharField(max_length=15, default='solution', null=False, validators=[MinLengthValidator]) #difficulty based on length
-    date_posted = models.DateTimeField(null=True)
+    date_posted = models.DateField(null=True, auto_now_add=True)
     solvers = models.ManyToManyField (User, through='Solve')
     #author = models.ManyToManyField(User, null=True)
     difficulty = models.CharField (max_length=20, default="medium")
