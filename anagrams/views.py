@@ -71,15 +71,39 @@ def home (request):
         solution = None
         print ('no user')
     solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False).order_by('time_taken')
+    user_solutions = Solve.objects.filter(user=request.user, revealed=False)
+    
+
+    solved_anagrams = []
+    for item in user_solutions:
+        if item.anagram not in solved_anagrams:
+            solved_anagrams.append(item.anagram)
 
     comment_list = Comment.objects.filter(anagram=todays_anagram).order_by('date_posted')
     comment_list = comment_list.reverse()
+    try:
+        source = request.META['HTTP_REFERER']
+    except:
+        source = None
+    if source == 'anagrams:check solution':
+        print ('checked')
+        print (request.META['HTTP_REFERER'])
+        if solution:
+            solved_state = 'correct'
+        else:
+            solved_state = 'incorrect'
+    else:
+        print ('unchecked')
+        solved_state = 'untried'
     
     
     context ['solutions'] = solutions
     context ['user_solution'] = solution
+    context ['user_solutions'] = user_solutions
     context ['comment_list'] = comment_list
     context ['anon'] = logged_in(request)
+    context ['solved_anagrams'] = solved_anagrams
+    context ['solved_state'] = solved_state
 
     return render(request, 'anagrams/home.html', context)
 
@@ -107,7 +131,7 @@ def leaderboard (request):
         medium = 0
         hard = 0
         for solution in objects:
-            if solution.last_30_days() == True:
+            if solution.anagram.was_published_last_month == True:
                 total += solution.time_taken
                 num_sol += 1
                 solutions.append(solution)
@@ -246,6 +270,12 @@ def detail (request, anagram_id):
         solution = None
 
     solutions = Solve.objects.filter(anagram=detailanagram, revealed=False).order_by('time_taken')
+    user_solutions = Solve.objects.filter(user=request.user, revealed=False).order_by('time_taken')
+    
+    solved_anagrams = []
+    for item in user_solutions:
+        if item.anagram not in solved_anagrams:
+            solved_anagrams.append(item.anagram)
 
     comment_list = Comment.objects.filter(anagram=detailanagram).order_by('date_posted')
     comment_list = comment_list.reverse()
@@ -253,6 +283,8 @@ def detail (request, anagram_id):
 
     context ['solutions'] = solutions
     context ['user_solution'] = solution
+    context ['user_solutions'] = user_solutions
+    context ['solved_anagrams'] = solved_anagrams
     context ['comment_list'] = comment_list
     context ['anon'] = logged_in(request)
 

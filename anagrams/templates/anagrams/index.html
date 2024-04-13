@@ -31,6 +31,45 @@
                             
                         {% for anagram in list %}
 
+                        {% if anagram in solved_anagrams %}
+
+                                <div class="notification is-primary is-light">
+                             
+                                        <div class="block">
+                                            <div class="icon-text">
+                                                <span class="icon has-text-success">
+                                                  <i class="fas fa-check-square"></i>
+                                                </span>
+                                                <span>Information</span>
+                                              </div>
+                                            <a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5 is-spaced">Anagram {{ anagram.id }}</a>
+                                        </div>
+                                        
+                        
+                                 
+                                        {% if anagram.difficulty == 'hard' %}
+                                        <span class="tag is-danger">
+                                            <h4 class="title is-6">{{anagram.difficulty}}</h4>
+                                        </span>
+                                        {% elif anagram.difficulty == 'medium'%}
+                                        <span class="tag is-warning">
+                                            <h4 class="title is-6">{{anagram.difficulty}}</h4>
+                                        </span>
+                                        {% else %}
+                                        <span class="tag is-primary">
+                                            <h4 class="title is-6">{{anagram.difficulty}}</h4>
+                                        </span>
+                                        {% endif %}
+                               
+
+                                    
+                                        <p> {{ anagram.date_posted }}</p>
+                                    
+                                </div>
+                                
+    
+                        {% else %}
+
                                 <div class="notification is-link is-light">
                              
                                         <div class="block"><a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5 is-spaced">Anagram {{ anagram.id }}</a></div>
@@ -56,8 +95,9 @@
                                         <p> {{ anagram.date_posted }}</p>
                                     
                                 </div>
+                      
     
-                
+                        {% endif %}
                         {% endfor %}
                     </div>
                 {% endfor %}
