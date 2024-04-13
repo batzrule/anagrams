@@ -33,6 +33,9 @@ class Anagram (models.Model):
     def was_published_today(self):
         return self.date_posted >= timezone.now() - datetime.timedelta(days=1)
 
+    def was_published_last_month(self):
+        return self.date_posted >= timezone.now() - datetime.timedelta(days=30)
+    
     '''
     def get_difficulty (self):
         if len(self.text) < 6 :
