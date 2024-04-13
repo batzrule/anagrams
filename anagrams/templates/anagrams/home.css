@@ -1,6 +1,10 @@
 ion-icon {
     font-size: 64px;
 
-    --ionicon-stroke-width: 16px;
+    --ionicon-stroke-width: 32px;
 
   }
+
+#tickicontext {
+    margin-left: 0.5em;
+}
