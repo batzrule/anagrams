@@ -38,9 +38,8 @@
                                         
                                             <div class="icon-text">
                                                 <a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5 is-spaced">Anagram {{ anagram.id }}</a>
-                                                <span class="material-symbols-outlined">
-                                                    check_circle
-                                                </span>
+                                                <ion-icon name="checkbox-outline"></ion-icon>
+                                                
                                               </div>
 
                                         
@@ -108,4 +107,8 @@
 
             
         {% endif %}
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
