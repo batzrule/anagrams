@@ -17,7 +17,7 @@
             
             {% if anagram %}
                 {% if user_solution %}
-                <section class="hero is-bermuda">
+                <section class="hero is-link">
                     <div class="hero is-head">
                         {% include 'anagrams/navbar.html' %} 
                     </div>
@@ -72,7 +72,7 @@
                 </section>
 
                 {% else %}
-                <section class="hero background-is-bermuda">
+                <section class="hero is-link">
                     <div class="hero-head">
                         {% include 'anagrams/navbar.html' %} 
                     </div>
@@ -80,7 +80,7 @@
                         <div class="columns is-centered">
                             <div class="column is-half">
                                 
-                                    <div class="notification is-half background-is-bermuda light-colour">
+                                    <div class="notification is-half background-is-link is-light">
                                         <h1 class="title is-2 has-text-link" >{{ anagram.text }}</h1>
                                     </div>
                                     <div class="block">
