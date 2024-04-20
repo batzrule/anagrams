@@ -67,12 +67,13 @@ def home (request):
             solution = Solve.objects.get(anagram=todays_anagram, user=request.user) 
             ''', correct=True'''
         except:
+            solution = None
             try:
                 attempt = Solve.objects.get(anagram=todays_anagram, user=request.user)
                 ''', correct=True'''
             except:
                 attempt = None
-            solution = None
+            
     else:
         solution = None
         attempt = None
