@@ -114,6 +114,9 @@
                                             {% else %}
                                             <h4 class="title is-4">Login or sign up to submit a solution!</h4>
                                             {% endif %}
+                                            {% if user_attempt %}
+                                                <h4 class="title is-4">Incorrect</h4>
+                                            {% endif %}
                                         </form>
                                         </p>
 

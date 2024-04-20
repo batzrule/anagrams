@@ -38,7 +38,7 @@ def home (request):
     '''
     if logged_in(request) == True:
         try:
-            solution = Solve.objects.get(anagram=todays_anagram, user=request.user)
+            solution = Solve.objects.get(anagram=todays_anagram, user=request.user, correct=True)
         except Solve.DoesNotExist:
             solution = None
     else:
@@ -64,14 +64,18 @@ def home (request):
     
     if request.user.is_authenticated :
         try:
-            solution = Solve.objects.get(anagram=todays_anagram, user=request.user)
+            solution = Solve.objects.get(anagram=todays_anagram, user=request.user, correct=True)
         except:
-            solution = None
+            try:
+                attempt = Solve.objects.get(anagram=todays_anagram, user=request.user, correct=False)
+            except:
+                attempt = None
     else:
         solution = None
-        print ('no user')
-    solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False).order_by('time_taken')
-    user_solutions = Solve.objects.filter(user=request.user, revealed=False)
+        attempt = None
+        #print ('no user')
+    solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False, correct=True).order_by('time_taken')
+    user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True)
     
 
     solved_anagrams = []
@@ -99,6 +103,7 @@ def home (request):
     
     context ['solutions'] = solutions
     context ['user_solution'] = solution
+    context ['user_attempt'] = attempt
     context ['user_solutions'] = user_solutions
     context ['comment_list'] = comment_list
     context ['anon'] = logged_in(request)
@@ -123,7 +128,7 @@ def leaderboard (request):
     biglist = []
     solutions = []
     for user in User.objects.all():
-        objects = Solve.objects.filter(user=user, revealed=False)
+        objects = Solve.objects.filter(user=user, revealed=False, correct=True)
 
         total = 0
         num_sol = 0
@@ -179,7 +184,7 @@ def leaderboard (request):
     context['user_list'] = d
     context['solutions'] = solutions
 
-    solves = Solve.objects.filter(user=request.user).order_by('time_taken')
+    solves = Solve.objects.filter(user=request.user, correct=True).order_by('time_taken')
     #quickest = time_length(solves[1].time_length)
 
     context['user_solves'] = solves
@@ -206,7 +211,7 @@ def check_solution (request, anagram_id):
     
     if solved_anagram.solution_text == user_solution.lower().strip():
         solved=True
-        s = Solve.objects.create(user=solver, anagram=solved_anagram, time_taken=time)
+        s = Solve.objects.create(user=solver, anagram=solved_anagram, time_taken=time, correct=True)
         s.save()
         messages.info(request, "Correct")
         print ('correct')
@@ -223,6 +228,8 @@ def check_solution (request, anagram_id):
     else:
         messages.info(request, "Incorrect")
         solved = False
+        s = Solve.objects.create(user=solver, anagram=solved_anagram, time_taken=time, correct=False)
+        s.save()
 
 
     return redirect (request.META['HTTP_REFERER'])
@@ -263,14 +270,18 @@ def detail (request, anagram_id):
     
     if request.user.is_authenticated:
         try:
-            solution = Solve.objects.get(anagram=detailanagram, user=request.user)
+            solution = Solve.objects.get(anagram=detailanagram, user=request.user, correct=True)
         except:
             solution = None
+            try:
+                attempt = Solve.objects.get(anagram=detailanagram, user=request.user, correct=False)
+            except:
+                attempt = None
     else:
         solution = None
 
-    solutions = Solve.objects.filter(anagram=detailanagram, revealed=False).order_by('time_taken')
-    user_solutions = Solve.objects.filter(user=request.user, revealed=False).order_by('time_taken')
+    solutions = Solve.objects.filter(anagram=detailanagram, revealed=False, correct=True).order_by('time_taken')
+    user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True).order_by('time_taken')
     
     solved_anagrams = []
     for item in user_solutions:
@@ -283,6 +294,7 @@ def detail (request, anagram_id):
 
     context ['solutions'] = solutions
     context ['user_solution'] = solution
+    context ['user_attempt'] = attempt
     context ['user_solutions'] = user_solutions
     context ['solved_anagrams'] = solved_anagrams
     context ['comment_list'] = comment_list
@@ -390,7 +402,7 @@ def create_anagram_page (request):
 def profile_page (request):
     context = {'user': request.user}
     user = request.user
-    solves = Solve.objects.filter(user=user)
+    solves = Solve.objects.filter(user=user, correct=True)
     number = len(solves)
     context ['solves'] = number
     context ['anon'] = logged_in(request)
