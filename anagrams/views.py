@@ -72,6 +72,7 @@ def home (request):
                 ''', correct=True'''
             except:
                 attempt = None
+            solution = None
     else:
         solution = None
         attempt = None
