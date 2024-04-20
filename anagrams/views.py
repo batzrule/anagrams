@@ -64,14 +64,14 @@ def home (request):
     
     if request.user.is_authenticated :
         try:
-            solution = Solve.objects.get(anagram=todays_anagram, user=request.user) 
-            ''', correct=True'''
+            solution = Solve.objects.get(anagram=todays_anagram, user=request.user, correct=True) 
+            
             attempt = None
         except:
             solution = None
             try:
-                attempt = Solve.objects.get(anagram=todays_anagram, user=request.user)
-                ''', correct=True'''
+                attempt = Solve.objects.get(anagram=todays_anagram, user=request.user, correct=False)
+                
             except:
                 attempt = None
             
@@ -79,10 +79,10 @@ def home (request):
         solution = None
         attempt = None
         #print ('no user')
-    solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False).order_by('time_taken')
-    ''', correct=True'''
-    user_solutions = Solve.objects.filter(user=request.user, revealed=False)
-    ''', correct=True'''
+    solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False, correct=True).order_by('time_taken')
+
+    user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True)
+
 
     solved_anagrams = []
     for item in user_solutions:
@@ -136,8 +136,8 @@ def leaderboard (request):
     biglist = []
     solutions = []
     for user in User.objects.all():
-        objects = Solve.objects.filter(user=user, revealed=False)
-        ''', correct=True'''
+        objects = Solve.objects.filter(user=user, revealed=False, correct=True)
+
 
         total = 0
         num_sol = 0
@@ -279,14 +279,14 @@ def detail (request, anagram_id):
     
     if request.user.is_authenticated:
         try:
-            solution = Solve.objects.get(anagram=detailanagram, user=request.user)
-            ''', correct=True'''
+            solution = Solve.objects.get(anagram=detailanagram, user=request.user, correct=True)
+
             attempt = None
         except:
             solution = None
             try:
-                attempt = Solve.objects.get(anagram=detailanagram, user=request.user)
-                ''', correct=False'''
+                attempt = Solve.objects.get(anagram=detailanagram, user=request.user, correct=False)
+
             except:
                 attempt = None
     else:
