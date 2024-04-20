@@ -54,7 +54,7 @@ class Solve (models.Model):
     time_taken = models.IntegerField(null=True)
     solution_date = models.DateTimeField(auto_now_add=True, null=True)
     revealed = models.BooleanField(default=False)
-    #correct = models.BooleanField(default=True)
+
 
     def last_30_days(self):
         return self.solution_date >= timezone.now() - datetime.timedelta(days=30)
