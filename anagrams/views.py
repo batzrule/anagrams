@@ -66,6 +66,7 @@ def home (request):
         try:
             solution = Solve.objects.get(anagram=todays_anagram, user=request.user) 
             ''', correct=True'''
+            attempt = None
         except:
             solution = None
             try:
@@ -90,6 +91,7 @@ def home (request):
 
     comment_list = Comment.objects.filter(anagram=todays_anagram).order_by('date_posted')
     comment_list = comment_list.reverse()
+    '''
     try:
         source = request.META['HTTP_REFERER']
     except:
@@ -104,6 +106,7 @@ def home (request):
     else:
         print ('unchecked')
         solved_state = 'untried'
+    '''
     
     
     context ['solutions'] = solutions
@@ -113,7 +116,7 @@ def home (request):
     context ['comment_list'] = comment_list
     context ['anon'] = logged_in(request)
     context ['solved_anagrams'] = solved_anagrams
-    context ['solved_state'] = solved_state
+    #context ['solved_state'] = solved_state
 
     return render(request, 'anagrams/home.html', context)
 
@@ -220,7 +223,7 @@ def check_solution (request, anagram_id):
         s = Solve.objects.create(user=solver, anagram=solved_anagram, time_taken=time, correct=True)
         s.save()
         messages.info(request, "Correct")
-        print ('correct')
+        #print ('correct')
         '''
         if solver:
             s = Solve.objects.create(user=solver, anagram=solved_anagram, time_taken=time)
@@ -278,6 +281,7 @@ def detail (request, anagram_id):
         try:
             solution = Solve.objects.get(anagram=detailanagram, user=request.user)
             ''', correct=True'''
+            attempt = None
         except:
             solution = None
             try:
@@ -287,6 +291,7 @@ def detail (request, anagram_id):
                 attempt = None
     else:
         solution = None
+        attempt = None
 
     solutions = Solve.objects.filter(anagram=detailanagram, revealed=False, correct=True).order_by('time_taken')
     user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True).order_by('time_taken')
