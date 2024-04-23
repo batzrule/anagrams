@@ -524,8 +524,7 @@ def make_columns (posted_data):
     list1 = []
     list2 = []
     list3 = []
-    list4 = []
-    main_list = [list1, list2, list3, list4]
+    main_list = [list1, list2, list3]
 
     if posted_data:
         if posted_data['difficulty'] == 'any difficulty':
@@ -544,7 +543,7 @@ def make_columns (posted_data):
 
 
     for x in range(len(anagrams)):
-        main_list[x%4].append(anagrams[x])
+        main_list[x%3].append(anagrams[x])
     return (main_list, difficulty)
     
 
