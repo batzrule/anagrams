@@ -91,15 +91,15 @@ class Comment (models.Model):
             number = (str(self.date_posted.day) + '/' + str(self.date_posted.month) + '/' + str(self.date_posted.year))
         
         elif timezone.now()-self.date_posted < datetime.timedelta(hours=1):
-            n = (str((timezone.now().minute-self.date_posted.minute)))
+            n = ((timezone.now().minute-self.date_posted.minute))
             if n <= 0:
                 n += 60
-            number = n + ' minutes ago'
+            number = str(n) + ' minutes ago'
         elif timezone.now()-self.date_posted < datetime.timedelta(days=1):
-            n = (str((timezone.now().hour-self.date_posted.hour)))
+            n = ((timezone.now().hour-self.date_posted.hour))
             if n <= 0:
                 n += 24
-            number = n + ' hours ago'
+            number = str(n) + ' hours ago'
         else:
             number = (str(timezone.now().day-self.date_posted.day)+ ' days ago')
 
