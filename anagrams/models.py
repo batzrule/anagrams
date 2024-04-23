@@ -81,7 +81,7 @@ class Solve (models.Model):
 class Comment (models.Model):
     anagram = models.ForeignKey(Anagram, on_delete=models.CASCADE)
 
-    text = models.CharField(max_length=60, null=True)
+    text = models.CharField(max_length=200, null=True)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     date_posted = models.DateTimeField( auto_now_add=True, null=True)
     likers = models.ManyToManyField(User, related_name='yes')
@@ -91,7 +91,7 @@ class Comment (models.Model):
             number = (str(self.date_posted.day) + '/' + str(self.date_posted.month) + '/' + str(self.date_posted.year))
         
         elif timezone.now()-self.date_posted < datetime.timedelta(hours=1):
-            number = (str((timezone.now().second-self.date_posted.second)//60)+ ' minutes ago')
+            number = (str(((timezone.now()-self.date_posted).second)//60)+ ' minutes ago')
         elif timezone.now()-self.date_posted < datetime.timedelta(days=1):
             number = (str((timezone.now().second-self.date_posted.second)//3600)+ ' hours ago')
         else:
