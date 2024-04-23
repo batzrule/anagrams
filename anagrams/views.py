@@ -120,7 +120,7 @@ def home (request):
     return render(request, 'anagrams/home.html', context)
 
 def past_anagrams (request):
-    (main_list, difficulty) = make_columns(request.POST)
+    (main_list, difficulty) = make_columns(request.POST,4)
     
 
     context = {'fil_dif':difficulty}
@@ -258,6 +258,7 @@ def detail (request, anagram_id):
     list1 = []
     list2 = []
     list3 = []
+
     main_list = [list1, list2, list3]
     for x in range(len(recent_anagrams)):
         main_list[x%3].append(recent_anagrams[x])
@@ -518,11 +519,12 @@ def calculate_points_weighted (solutions):
         totalpoints += points    
     return totalpoints
 
-def make_columns (posted_data):
+def make_columns (posted_data, number):
     list1 = []
     list2 = []
     list3 = []
-    main_list = [list1, list2, list3]
+    list4 = []
+    main_list = [list1, list2, list3, list4]
 
     if posted_data:
         if posted_data['difficulty'] == 'any difficulty':
@@ -541,7 +543,7 @@ def make_columns (posted_data):
 
 
     for x in range(len(anagrams)):
-        main_list[x%3].append(anagrams[x])
+        main_list[x%number].append(anagrams[x])
     return (main_list, difficulty)
     
 
