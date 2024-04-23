@@ -13,7 +13,7 @@
                     <tbody>
                         {% for object in solutions %}
                             {% if object.user == request.user %}
-                                <tr class="is-selected">
+                                <tr class="is-success">
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ object.user }}</td>
                                     <td>{{ object.time_length }}</td>
