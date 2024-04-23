@@ -22,17 +22,22 @@ from django.contrib import messages
 def home (request):
     recent_anagrams = Anagram.objects.order_by('-date_posted')
     todays_anagram = recent_anagrams[0]
+
+    number = 4
     list1 = []
     list2 = []
     list3 = []
-    main_list = [list1, list2, list3]
+    list4 = []
+    main_list = [list1, list2, list3, list4]
     for x in range(len(recent_anagrams)):
-        main_list[x%3].append(recent_anagrams[x])
+        main_list[x%number].append(recent_anagrams[x])
     
 
     context = {}
     context['anagram'] = todays_anagram
     context['recent_anagrams'] = main_list
+    
+    context['column number'] = number
 
     '''
     if logged_in(request) == True:
@@ -120,12 +125,14 @@ def home (request):
     return render(request, 'anagrams/home.html', context)
 
 def past_anagrams (request):
-    (main_list, difficulty) = make_columns(request.POST,4)
+    number = 4
+    (main_list, difficulty) = make_columns(request.POST , number)
     
 
     context = {'fil_dif':difficulty}
 
     context['recent_anagrams'] = main_list
+    context['column number'] = number
 
     return render(request, 'anagrams/past_anagrams.html', context)
 
@@ -255,14 +262,18 @@ def reveal_solution (request, anagram_id):
 def detail (request, anagram_id):
     detailanagram = get_object_or_404(Anagram, id=anagram_id)
     recent_anagrams = Anagram.objects.order_by('-date_posted')
+
+    number = 4
     list1 = []
     list2 = []
     list3 = []
+    list4 = []
 
-    main_list = [list1, list2, list3]
+    main_list = [list1, list2, list3, list4]
     for x in range(len(recent_anagrams)):
-        main_list[x%3].append(recent_anagrams[x])
+        main_list[x%number].append(recent_anagrams[x])
     context = {'anagram': detailanagram, 'recent_anagrams': main_list}
+    context['column number'] = number
 
     '''
     if logged_in(request) == True:
