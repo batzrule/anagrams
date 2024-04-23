@@ -83,7 +83,7 @@ class Comment (models.Model):
 
     text = models.CharField(max_length=60, null=True)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
-    date_posted = models.DateTimeField( null=True)
+    date_posted = models.DateTimeField( auto_now_add=True, null=True)
     likers = models.ManyToManyField(User, related_name='yes')
 
     def time_ago(self):
