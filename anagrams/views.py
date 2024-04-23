@@ -25,10 +25,9 @@ def home (request):
     list1 = []
     list2 = []
     list3 = []
-    list4 = []
-    main_list = [list1, list2, list3, list4]
+    main_list = [list1, list2, list3]
     for x in range(len(recent_anagrams)):
-        main_list[x%4].append(recent_anagrams[x])
+        main_list[x%3].append(recent_anagrams[x])
     
 
     context = {}
@@ -259,10 +258,9 @@ def detail (request, anagram_id):
     list1 = []
     list2 = []
     list3 = []
-    list4 = []
-    main_list = [list1, list2, list3, list4]
+    main_list = [list1, list2, list3]
     for x in range(len(recent_anagrams)):
-        main_list[x%4].append(recent_anagrams[x])
+        main_list[x%3].append(recent_anagrams[x])
     context = {'anagram': detailanagram, 'recent_anagrams': main_list}
 
     '''
