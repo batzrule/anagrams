@@ -303,6 +303,9 @@ def detail (request, anagram_id):
 
     comment_list = Comment.objects.filter(anagram=detailanagram).order_by('date_posted')
     comment_list = comment_list.reverse()
+    print (comment_list)
+    for item in comment_list:
+        print (item.text + str(item.date_posted) + str(item.time_ago()))
 
 
     context ['solutions'] = solutions
