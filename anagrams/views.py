@@ -84,14 +84,17 @@ def home (request):
         attempt = None
         #print ('no user')
     solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False, correct=True).order_by('time_taken')
+    try:
+        user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True)
 
-    user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True)
 
-
-    solved_anagrams = []
-    for item in user_solutions:
-        if item.anagram not in solved_anagrams:
-            solved_anagrams.append(item.anagram)
+        solved_anagrams = []
+        for item in user_solutions:
+            if item.anagram not in solved_anagrams:
+                solved_anagrams.append(item.anagram)
+    except:
+        user_solutions = None
+        solved_anagrams = None
 
     comment_list = Comment.objects.filter(anagram=todays_anagram).order_by('date_posted')
     comment_list = comment_list.reverse()
@@ -175,6 +178,7 @@ def leaderboard (request):
             '''
             difficulties = [easy, medium, hard]
             list = [user, num_sol, mean, points, difficulties]
+            d[user] = list
             biglist.append(list)
 
 
@@ -341,7 +345,9 @@ def about_page (request):
     context = {'fil_dif':difficulty}
 
     context['recent_anagrams'] = main_list
+    context ['number'] = 4
     return render(request, 'anagrams/about_page.html', context)
+
 
    
 
