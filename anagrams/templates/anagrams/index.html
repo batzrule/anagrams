@@ -30,11 +30,10 @@
                     <div class="column is-one-quarter">
                             
                         {% for anagram in list %}
-                            {% if solved_anagrams %}    
 
-                                {% if anagram in solved_anagrams %}
+                        {% if anagram in solved_anagrams %}
 
-                                    <div class="notification is-success">
+                                <div class="notification is-success">
                              
                                         
                                             <div class="icon-text" id="tickicontext">
@@ -43,7 +42,7 @@
                                                     <ion-icon name="checkmark-circle" ></ion-icon>
                                                 </span>
                                                 
-                                            </div>
+                                              </div>
 
                                         
                         
@@ -65,46 +64,18 @@
 
                                     
                                         <p> {{ anagram.date_posted }}</p>
-                                
+                                    
+                                </div>
                                 
     
-                                {% else %}
+                        {% else %}
 
-                                    <div class="notification is-link is-light">
+                                <div class="notification is-link is-light">
                              
                                         <div class="block"><a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5 is-spaced">Anagram {{ anagram.id }}</a></div>
                                         
                         
                                  
-                                            {% if anagram.difficulty == 'hard' %}
-                                            <span class="tag is-danger">
-                                                <h4 class="title is-6">{{anagram.difficulty}}</h4>
-                                            </span>
-                                            {% elif anagram.difficulty == 'medium'%}
-                                            <span class="tag is-warning">
-                                                <h4 class="title is-6">{{anagram.difficulty}}</h4>
-                                            </span>
-                                            {% else %}
-                                            <span class="tag is-success">
-                                                <h4 class="title is-6">{{anagram.difficulty}}</h4>
-                                            </span>
-                                            {% endif %}
-                               
-
-                                    
-                                            <p> {{ anagram.date_posted }}</p>
-                                        </div>
-                                    </div>
-                      
-    
-                                {% endif %}
-                            {% else %}
-                                <div class="notification is-link is-light">
-                             
-                                    <div class="block"><a href="{% url 'anagrams:detail' anagram.id %}" class="title is-5 is-spaced">Anagram {{ anagram.id }}</a></div>
-                                
-                
-                        
                                         {% if anagram.difficulty == 'hard' %}
                                         <span class="tag is-danger">
                                             <h4 class="title is-6">{{anagram.difficulty}}</h4>
@@ -118,17 +89,16 @@
                                             <h4 class="title is-6">{{anagram.difficulty}}</h4>
                                         </span>
                                         {% endif %}
-                    
+                               
 
-                            
+                                    
                                         <p> {{ anagram.date_posted }}</p>
-                        
-                                    </div>   
-                                </div>  
-          
-
-                            {% endif %}
-                    {% endfor %}
+                                    
+                                </div>
+                      
+    
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 {% endfor %}
             </div>
