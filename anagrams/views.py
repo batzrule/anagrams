@@ -339,13 +339,15 @@ def detail (request, anagram_id):
 
 def about_page (request):
 
-    (main_list, difficulty) = make_columns(request.POST)
+    number = 4
+
+    (main_list, difficulty) = make_columns(request.POST, number)
     
 
     context = {'fil_dif':difficulty}
 
     context['recent_anagrams'] = main_list
-    context ['number'] = 4
+    context ['number'] = number
     return render(request, 'anagrams/about_page.html', context)
 
 
