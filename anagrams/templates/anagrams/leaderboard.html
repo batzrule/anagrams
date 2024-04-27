@@ -12,18 +12,20 @@
                     </thead>
                     <tbody>
                         {% for object in solutions %}
-                            {% if object.user == request.user %}
-                                <tr class="is-success">
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ object.user }}</td>
-                                    <td>{{ object.time_length }}</td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ object.user }}</td>
-                                    <td>{{ object.time_length }}</td>
-                                </tr>
+                            {% if object.username not 'anagrams' %}
+                                {% if object.user == request.user %}
+                                    <tr class="is-success">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ object.user }}</td>
+                                        <td>{{ object.time_length }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ object.user }}</td>
+                                        <td>{{ object.time_length }}</td>
+                                    </tr>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     </tbody>
