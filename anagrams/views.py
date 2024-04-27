@@ -316,13 +316,26 @@ def detail (request, anagram_id):
         solution = None
         attempt = None
 
-    solutions = Solve.objects.filter(anagram=detailanagram, revealed=False, correct=True).order_by('time_taken')
-    user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True).order_by('time_taken')
+    try:
+        solutions = Solve.objects.filter(anagram=detailanagram, revealed=False, correct=True).order_by('time_taken')
+        for item in solutions:
+            if item.user.username == 'anagrams':
+                solutions.delete(item)
+    except:
+        solutions = None
     
-    solved_anagrams = []
-    for item in user_solutions:
-        if item.anagram not in solved_anagrams:
-            solved_anagrams.append(item.anagram)
+
+    try:
+        user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True)
+
+
+        solved_anagrams = []
+        for item in user_solutions:
+            if item.anagram not in solved_anagrams:
+                solved_anagrams.append(item.anagram)
+    except:
+        user_solutions = None
+        solved_anagrams = None
 
     comment_list = Comment.objects.filter(anagram=detailanagram).order_by('date_posted')
     comment_list = comment_list.reverse()
