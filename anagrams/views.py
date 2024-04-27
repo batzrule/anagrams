@@ -83,7 +83,16 @@ def home (request):
         solution = None
         attempt = None
         #print ('no user')
-    solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False, correct=True).order_by('time_taken')
+    
+    try:
+        solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False, correct=True).order_by('time_taken')
+        for item in solutions:
+            if item.user.username == 'anagrams':
+                solutions.delete(item)
+    except:
+        solutions = None
+
+
     try:
         user_solutions = Solve.objects.filter(user=request.user, revealed=False, correct=True)
 
