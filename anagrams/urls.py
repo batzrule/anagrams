@@ -23,5 +23,4 @@ urlpatterns= [
     path ('profile/<int:user_id>/', views.profile_page, name='profile page'),
     path ('about_page/', views.about_page, name='about page'),
     path ('monthly_leaderboard/', views.leaderboard, name='monthly leaderboard')
-
 ]
