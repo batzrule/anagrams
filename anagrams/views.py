@@ -86,7 +86,7 @@ def home (request):
     
     try:
         solutions = Solve.objects.filter(anagram=todays_anagram, revealed=False, correct=True).order_by('time_taken')
-        for item in solutions:
+        #for item in solutions:
             #if item.user.username == 'anagrams':
                 #solutions.delete(item)
     except:
@@ -318,7 +318,7 @@ def detail (request, anagram_id):
 
     try:
         solutions = Solve.objects.filter(anagram=detailanagram, revealed=False, correct=True).order_by('time_taken')
-        for item in solutions:
+        #for item in solutions:
             #if item.user.username == 'anagrams':
                 #solutions.delete(item)
     except:
