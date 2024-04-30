@@ -34,7 +34,7 @@ class Anagram (models.Model):
         return self.date_posted >= timezone.now() - datetime.timedelta(days=1)
 
     def was_published_last_month(self):
-        return self.date_posted >= timezone.now() - datetime.timedelta(days=30)
+        return timezone.now() - self.solution_date <= datetime.timedelta(days=30)
     
     '''
     def get_difficulty (self):
@@ -57,7 +57,7 @@ class Solve (models.Model):
     correct = models.BooleanField(null=True)
 
     def last_30_days(self):
-        return self.solution_date >= timezone.now() - datetime.timedelta(days=30)
+        return timezone.now() - self.solution_date <= datetime.timedelta(days=30)
 
     def time_length(self):
         h = self.time_taken // 3600
