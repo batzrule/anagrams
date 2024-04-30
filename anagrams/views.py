@@ -163,7 +163,8 @@ def leaderboard (request):
         medium = 0
         hard = 0
         for solution in objects:
-            if solution.anagram.was_published_last_month == True:
+            if solution.anagram.was_published_last_month() == True:
+                print (solution.anagram)
                 total += solution.time_taken
                 num_sol += 1
                 solutions.append(solution)

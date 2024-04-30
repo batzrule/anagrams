@@ -53,15 +53,20 @@
                     {% if user_solves %}
                         {% for key, value in user_list.items %}
                             {% if value.0 == request.user %}
-                                {% if key == 10 or key == 9 or key == 8 or key == 7 or key == 6 or key == 5 or key == 4 or key == 3 or key == 2 or key == 1 %}
-                                <div class="block">
-                                    <p> Congratulations, you are in place <strong>{{key}}</strong> in the leaderboard with an average time of <strong>{{value.2}}</strong> accross <strong>{{value.1}}</strong> anagrams!</p>
-                                </div>
-                                {% else %}
-                                <div class="block">
-                                    <p> You are in place <strong>{{key}}</strong> in the leaderboard with an average time of <strong>{{value.2}}</strong> accross <strong>{{value.1}}</strong> anagrams</p>
-                                </div>
-                                {% endif %}
+                                {% comment %}
+                                    {% if key == 10 or key == 9 or key == 8 or key == 7 or key == 6 or key == 5 or key == 4 or key == 3 or key == 2 or key == 1 %}
+                                    <div class="block">
+                                        <p> Congratulations, you are in place <strong>{{key}}</strong> in the leaderboard with an average time of <strong>{{value.2}}</strong> accross <strong>{{value.1}}</strong> anagrams!</p>
+                                    </div>
+                                    {% else %}
+                                {% endcomment %}
+                                
+                                    <div class="block">
+                                        <p> You are in place <strong>{{key}}</strong> in the leaderboard with an average time of <strong>{{value.2}}</strong> accross <strong>{{value.1}}</strong> anagrams</p>
+                                    </div>
+                                {% comment %}
+                                    {% endif %}
+                                {% endcomment %}
                             {% endif %}
                         {% endfor %}
                     {% else %}
