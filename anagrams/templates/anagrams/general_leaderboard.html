@@ -51,7 +51,7 @@
                     
                     <h2 class="title is-2">Monthly Leaderboard</h2>
                     {% if user_solves %}
-                        {% for key, value in user_list.items %}
+                        {% for key, value in final_list.items %}
                             {% if value.0 == request.user %}
                                 {% comment %}
                                     {% if key == 10 or key == 9 or key == 8 or key == 7 or key == 6 or key == 5 or key == 4 or key == 3 or key == 2 or key == 1 %}
@@ -88,7 +88,7 @@
                                 <th>Rank</th>
                                 <th>Username</th>
                                 <th>Solves</th>
-                                <th>Average Time</th>
+                                <th>Average Time</th> 
                                 <th>Points</th>
                             </tr>
                         </thead>
