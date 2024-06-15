@@ -152,9 +152,11 @@ def leaderboard (request):
     context = {}
     d = {}
     biglist = []
-    solutions = []
+    
     for user in User.objects.all():
         objects = Solve.objects.filter(user=user, revealed=False, correct=True)
+
+        solutions = []
 
 
         total = 0
@@ -208,10 +210,11 @@ def leaderboard (request):
 
     for x in range(len(biglist)):
         biglist[x][2] = time_length(biglist[x][2])
-        d[x+1] = biglist[x]
+        # d[x+1] = biglist[x]
 
     context['user_list'] = d
     context['solutions'] = solutions
+    context['biglist'] = biglist
 
     solves = Solve.objects.filter(user=request.user, correct=True).order_by('time_taken')
     #quickest = time_length(solves[1].time_length)

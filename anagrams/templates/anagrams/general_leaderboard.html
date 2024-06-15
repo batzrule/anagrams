@@ -93,13 +93,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for key, value in user_list.items %}
+                            {% for x in range len(biglist) %}
                                 <tr>
-                                    <td>{{ key }}</td>
-                                    <td>{{ value.0 }}</td>
-                                    <td>{{ value.1 }}</td>
-                                    <td>{{ value.2 }}</td>
-                                    <td>{{ value.3 }}</td>
+                                    <td>{{ x }}</td>
+                                    <td>{{ biglist.x.0 }}</td>
+                                    <td>{{ biglist.x.1 }}</td>
+                                    <td>{{ biglist.x.2 }}</td>
+                                    <td>{{ biglist.x.3 }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
