@@ -93,13 +93,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for x in range len(biglist) %}
+                            {% for x in biglist %}
                                 <tr>
-                                    <td>{{ x }}</td>
-                                    <td>{{ biglist.x.0 }}</td>
-                                    <td>{{ biglist.x.1 }}</td>
-                                    <td>{{ biglist.x.2 }}</td>
-                                    <td>{{ biglist.x.3 }}</td>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ x.0 }}</td>
+                                    <td>{{ x.1 }}</td>
+                                    <td>{{ x.2 }}</td>
+                                    <td>{{ x.3 }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
