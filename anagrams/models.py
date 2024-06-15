@@ -31,10 +31,10 @@ class Anagram (models.Model):
         return self.text
 
     def was_published_today(self):
-        return self.date_posted >= timezone.now() - datetime.timedelta(days=1)
+        return self.date_posted >= datetime.date.today() - datetime.timedelta(days=1)
 
     def was_published_last_month(self):
-        return timezone.now() - self.date_posted <= datetime.timedelta(days=30)
+        return datetime.date.today() - self.date_posted <= datetime.timedelta(days=30)
     
     '''
     def get_difficulty (self):
