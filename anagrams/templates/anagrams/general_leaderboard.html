@@ -26,7 +26,7 @@
             <div class="column is-one-quarter">
 
                 {% if user_solves %}
-                    {% for key, value in user_list.items %}
+                    {% for key, value in final_list.items %}
                         {% if value.0 == request.user %}
                     
                             <div class="block">
@@ -93,13 +93,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for x in biglist %}
+                            {% for key, value in final_list.items %}
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ x.0 }}</td>
-                                    <td>{{ x.1 }}</td>
-                                    <td>{{ x.2 }}</td>
-                                    <td>{{ x.3 }}</td>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value.0 }}</td>
+                                    <td>{{ value.1 }}</td>
+                                    <td>{{ value.2 }}</td>
+                                    <td>{{ value.3 }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
