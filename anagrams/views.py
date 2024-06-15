@@ -210,7 +210,7 @@ def leaderboard (request):
 
     for x in range(len(biglist)):
         biglist[x][2] = time_length(biglist[x][2])
-        d[x] = biglist[x]
+        d[x+1] = biglist[x]
 
     context['user_list'] = d
     context['solutions'] = solutions
